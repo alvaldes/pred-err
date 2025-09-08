@@ -1,0 +1,38 @@
+\documentclass[conference,9pt]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\begin{document}
+\title{La Maldición de la Dimensionalidad}
+\author{
+  \IEEEauthorblockN{Angel Luis Valdés Sánchez}
+  \IEEEauthorblockA{Universidad Tecnológica de la Mixteca\\
+  Huajuapan de León, Oaxaca, México\\
+  \texttt{angelluis2605@gs.utm.mx}}
+}
+\maketitle
+
+\section{Origen del Término}
+El concepto de \emph{“maldición de la dimensionalidad”} se refiere a que muchos métodos algorítmicos en $\mathbb{R}^d$ se vuelven exponencialmente más difíciles conforme crece la dimensión $d$ \cite{Verleysen2005}. Esta expresión fue acuñada por el matemático Richard~E.~Bellman para describir el problema causado por el aumento exponencial del volumen al añadir dimensiones adicionales al espacio euclidiano \cite{BellmanDP1957}. Bellman introdujo el término a fines de la década de 1950, en el contexto de la optimización de múltiples variables y la programación dinámica. En particular, en su libro \emph{Dynamic Programming} (1957) Bellman advirtió que al incrementar el número de variables de estado en un problema, el espacio de posibles estados crece de forma explosiva, dificultando los cálculos necesarios para encontrar soluciones óptimas \cite{BellmanDP1957}. Este fenómeno, descrito originalmente en problemas de control y decisiones dinámicas, fue posteriormente generalizado en su obra \emph{Adaptive Control Processes} (1961) \cite{Bellman1961} y por otros investigadores, reconociéndose como un obstáculo fundamental en el análisis de datos de alta dimensionalidad \cite{Zimek2012}.
+
+\section{Concepto y Fundamentos Teóricos}
+En términos generales, la maldición de la dimensionalidad engloba una serie de fenómenos adversos que aparecen al analizar datos en espacios de alta dimensión y que no se presentan en entornos de baja dimensión \cite{Verleysen2005}. Un tema común en estos problemas es la \textbf{escasez de datos}: a medida que la dimensionalidad aumenta, el volumen del espacio crece tan rápidamente que los datos disponibles se vuelven extremadamente dispersos o escasos en relación con el espacio total. Consecuentemente, para obtener resultados fiables, la cantidad de muestras requeridas crece de manera exponencial con el número de dimensiones del dato \cite{Zimek2012}. En otras palabras, la densidad efectiva de los puntos disminuye drásticamente al añadir nuevas variables, lo que implica que se necesitan muchas más observaciones para cubrir o muestrear adecuadamente el espacio en altas dimensiones.
+
+Otro aspecto clave es la \textbf{geometría contraintuitiva} de las altas dimensiones. Ciertas propiedades geométricas cambian radicalmente con $d$: por ejemplo, el volumen de una hiperesfera de radio fijo crece inicialmente con $d$ pero después decrece y tiende a cero en dimensiones muy elevadas, volviéndose insignificante en comparación con el volumen de un hipercubo circunscrito \cite{Verleysen2005}. De hecho, en dimensiones altas casi todo el volumen de un hipercubo se concentra en las “esquinas” lejanas del centro, lo que significa que puntos distribuidos aleatoriamente tienden a estar cerca de los bordes del espacio. Asimismo, las distancias euclídeas tienden a \textbf{concentrarse}: la diferencia entre la distancia al vecino más cercano y al más lejano se vuelve despreciable en altas dimensiones \cite{Beyer1999}. En la práctica, esto implica que la noción de cercanía relativa pierde significado cuando $d$ es muy grande, ya que prácticamente todos los puntos están casi igual de lejos unos de otros.
+
+Estas características conllevan \textbf{consecuencias negativas} para muchos algoritmos de minería de datos, aprendizaje automático y análisis numérico \cite{Zimek2012}. Técnicas que funcionan bien en bajas dimensiones suelen volverse ineficientes o ineficaces en dimensiones altas. Por ejemplo, muchos métodos de búsqueda y organización de datos se basan en detectar regiones donde los objetos forman grupos con propiedades similares; bajo la maldición de la dimensionalidad, sin embargo, todos los objetos aparecen disímiles entre sí, dificultando la agrupación (\emph{clustering}) y la indexación eficiente de los datos. En el campo del reconocimiento de patrones, un efecto conocido es el \emph{fenómeno de Hughes}: al aumentar el número de características utilizadas en un clasificador, su desempeño inicialmente mejora, pero más allá de cierto punto comienza a degradarse si el número de muestras de entrenamiento es limitado \cite{Hughes1968}. Este comportamiento, analizado por Hughes en 1968, ilustra otra faceta de la maldición de la dimensionalidad: añadir dimensiones irrelevantes o poco informativas puede empeorar la generalización de un modelo debido a la escasez relativa de datos por dimensión adicional. De manera similar, Beyer \emph{et al.} (1999) demostraron formalmente que en espacios de muy alta dimensión las consultas de vecino más cercano se vuelven inestables: con alta probabilidad, la distancia al punto más cercano es casi indistinguible de la distancia a cualquier otro punto tomado al azar \cite{Beyer1999}. Resultados como estos subrayan que, en dimensiones elevadas, muchas suposiciones habituales (por ejemplo, la existencia de vecinos “cercanos” significativos o de cúmulos compactos) dejan de ser válidas, a menos que se cuente con un volumen de datos exponencialmente mayor o se apliquen técnicas adecuadas de reducción de dimensionalidad.
+
+\section{Conclusión}
+La maldición de la dimensionalidad representa un reto inevitable en la era del análisis de grandes volúmenes de datos. Este fenómeno muestra cómo al aumentar el número de dimensiones los datos se vuelven escasos, las distancias pierden significado y las propiedades geométricas se vuelven contraintuitivas. En otras palabras, lo que en espacios pequeños parece lógico y manejable, en espacios de alta dimensión se convierte en un obstáculo para algoritmos y métodos tradicionales.
+
+\begin{thebibliography}{00}
+\bibitem{BellmanDP1957} R.~E.~Bellman, \emph{Dynamic Programming}. Princeton, NJ: Princeton University Press, 1957.
+\bibitem{Bellman1961} R.~E.~Bellman, \emph{Adaptive Control Processes: A Guided Tour}. Princeton, NJ: Princeton University Press, 1961.
+\bibitem{Hughes1968} G.~F.~Hughes, “On the mean accuracy of statistical pattern recognizers,” \emph{IEEE Trans. Inform. Theory}, vol.~14, no.~1, pp.~55–63, 1968.
+\bibitem{Beyer1999} K.~Beyer, J.~Goldstein, R.~Ramakrishnan, and U.~Shaft, “When is ‘nearest neighbor’ meaningful?,” in \emph{Proc. 7th Int. Conf. on Database Theory (ICDT)}, 1999, pp.~217–235.
+\bibitem{Verleysen2005} M.~Verleysen and D.~Fran\c{c}ois, “The curse of dimensionality in data mining and time series prediction,” in \emph{Proc. Int. Work-Conf. on Artificial Neural Networks (IWANN)}, LNCS 3512, 2005, pp.~758–770.
+\bibitem{Zimek2012} A.~Zimek, E.~Schubert, and H.-P.~Kriegel, “A survey on unsupervised outlier detection in high-dimensional numerical data,” \emph{Statistical Analysis and Data Mining}, vol.~5, no.~5, pp.~363–387, 2012.
+\end{thebibliography}
+
+\end{document}

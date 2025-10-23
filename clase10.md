@@ -38,6 +38,9 @@ p(x) = 1/((2π)^(l/2) \* |Σ|^(1/2)) \* exp(-1/2 (x - μ)^T Σ^(-1) (x - μ))
 clase(x) = arg max {p(X|wi) \* P(wi)}
 i
 
+> [!IMPORTANT]
+> A la funcion de verosimilitud se le llama tambien evidencia y a la probabilidad a priori se le llama creencia.
+
 > Tarea:
 > Implementar un clasificador Bayesiano para el dataset de Iris.
 > separar el dataset en 80% train y 20% test

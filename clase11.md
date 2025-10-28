@@ -12,7 +12,7 @@ dim2 -- N^2 = 40,000
 
 Para aliviar esto, un enfoque es asumir que las caracteristicas individuales xj, j=1,2,...,l son independientes estadisticamente. Entonces si, es decir,
 
-p(X|wi) =
+p(X|wi) = pi desde j=1 hasta l de p(xj|wi) --> se usa la pdf gaussiana de 1 dimension
 
 > [!NOTE]
 > El bayesiano es **2C** parámetros ya que se necesitan la media y varianza para cada clase.
